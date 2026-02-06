@@ -1,0 +1,15 @@
+# Default: treat all files as text and normalize to LF in repo
+* text eol=lf
+
+# Mark binary files explicitly
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.jar binary
+
+# CRLF for certain file types that require it
+*.bat text eol=crlf
