@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Dict, Iterator, List, Optional, Tuple
 
 
-VERSION = "2.0"
+VERSION = "2.1"
 DEFAULT_BANDWIDTH = "250k"
 DEFAULT_MAX_PROBES = 3
 PACKET_OVERHEAD_BYTES = 28  # 20 bytes IP header + 8 bytes UDP header
@@ -812,12 +812,15 @@ def main(argv: List[str]) -> int:
 
     logger.info("Scan complete at %s", time.ctime())
     if args.output:
-        try:
-            results.write(args.output)
-            logger.info("Wrote %d unique results to %s", len(results._ordered), args.output)
-        except OSError as e:
-            logger.error("Failed to write output file %s: %s", args.output, e)
-            return 1
+        if len(results._ordered) == 0:
+            logger.info("No results found; not writing output file %s", args.output)
+        else:
+            try:
+                results.write(args.output)
+                logger.info("Wrote %d unique results to %s", len(results._ordered), args.output)
+            except OSError as e:
+                logger.error("Failed to write output file %s: %s", args.output, e)
+                return 1
     return 0
 
 
