@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Dict, Iterator, List, Optional, Tuple
 
 
-VERSION = "2.1"
+VERSION = "2.2.0"
 DEFAULT_BANDWIDTH = "250k"
 DEFAULT_MAX_PROBES = 3
 PACKET_OVERHEAD_BYTES = 28  # 20 bytes IP header + 8 bytes UDP header
@@ -732,6 +732,12 @@ def build_arg_parser(prog: str) -> argparse.ArgumentParser:
         help="Suppress startup/progress logs; only show replies and warnings/errors.",
     )
     p.add_argument(
+        "--write-empty",
+        dest="write_empty",
+        action="store_true",
+        help="Write the output file even when no results are found (creates an empty file). Requires --output.",
+    )
+    p.add_argument(
         "targets",
         nargs="*",
         help="Targets to scan (IPs, hostnames, and/or CIDRs). Ignored if --file is provided.",
@@ -812,7 +818,7 @@ def main(argv: List[str]) -> int:
 
     logger.info("Scan complete at %s", time.ctime())
     if args.output:
-        if len(results._ordered) == 0:
+        if len(results._ordered) == 0 and not args.write_empty:
             logger.info("No results found; not writing output file %s", args.output)
         else:
             try:

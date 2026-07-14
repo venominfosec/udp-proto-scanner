@@ -118,6 +118,7 @@ Use `--quiet` to suppress non-essential progress logs. In quiet mode:
 - **`--bandwidth`**: cap sending rate (bits/sec). Accepts suffixes `K/M/G` (e.g. `250k`, `1.5M`)
 - **`--retries`**: number of probe packets sent per host, per probe type
 - **`--output`**: write deduplicated `ip:port` results to a file
+- **`--write-empty`**: write the output file even when no results are found (creates an empty file); requires `--output`
 - **`--quiet`**: only show replies + warnings/errors
 - **`--debug`**: print JSON of parsed CLI args immediately after startup (helpful for troubleshooting)
 
