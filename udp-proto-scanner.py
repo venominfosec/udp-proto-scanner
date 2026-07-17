@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Dict, Iterator, List, Optional, Tuple
 
 
-VERSION = "2.2.0"
+VERSION = "2.2.1"
 DEFAULT_BANDWIDTH = "250k"
 DEFAULT_MAX_PROBES = 3
 PACKET_OVERHEAD_BYTES = 28  # 20 bytes IP header + 8 bytes UDP header
@@ -272,7 +272,7 @@ class FileTargetSource(TargetSource):
             with open(self._path, "r", encoding="utf-8", errors="replace") as fh:
                 for line in fh:
                     s = line.strip()
-                    if not s:
+                    if not s or s.startswith("#"):
                         continue
                     s = s.replace("\r", "").replace("\n", "")
                     for ip in iter_ips_from_token(s, resolve_names=self._resolve_names):
