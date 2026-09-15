@@ -9,7 +9,7 @@ This is a Python 3 port/modernization of the original `udp-proto-scanner.pl` by 
 - **What it does**: sends known UDP probe payloads (DNS, NTP, TFTP, RPC, etc.) to targets and logs any replies.
 - **What it doesn’t do**: it is **not** a general UDP port scanner. It won’t enumerate open/closed ports; it’s focused on *discovering specific UDP services* that answer to specific probes.
 
-This is useful during host/service discovery in pentests, especially when targets are heavily firewalled and only expose UDP services.
+This is useful during host/service discovery, especially when targets are heavily firewalled and only expose UDP services.
 
 ## Quick start
 
